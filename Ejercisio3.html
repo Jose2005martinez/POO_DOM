@@ -1,19 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercisio 3 </title>
+    <title>Cambio de Color de Párrafo</title>
+    <style>
+        #miParrafo {
+            padding: 20px;
+            border: 1px solid #000;
+            margin: 20px;
+        }
+    </style>
 </head>
 <body>
-    
-<h1>Cambiar el color de los fondos</h1>
-<p id = "miParrafo">Este es un parafo cuyo color se puede cambiar</p>
-<button id = "btnRojo">Color Rojo</button>
-<button id = "btnNegro">color Negro </button>
 
-<script src = "script3.js"></script>
+    <p id="miParrafo">Este es un párrafo cuyo color de fondo cambiará.</p>
+    <button id="miBoton">Cambiar Color</button>
 
+    <script>
+        class Elemento {
+    constructor(elementId) {
+        this.element = document.getElementById(elementId);
+    }
+
+    cambiarColorFondo(color) {
+        this.element.style.backgroundColor = color;
+    }
+}
+
+class Boton extends Elemento {
+    constructor(elementId, colores) {
+        super(elementId);
+        this.colores = colores;
+        this.indiceColor = 0;
+
+        // Agregar el evento de clic al botón
+        document.getElementById('miBoton').addEventListener('click', () => {
+            this.cambiarColorFondo(this.colores[this.indiceColor]);
+            this.indiceColor = (this.indiceColor + 1) % this.colores.length; // Cambiar el índice
+        });
+    }
+}
+
+// Crear una instancia de Boton con los colores rojo, negro y azul
+const colores = ['red', 'black', 'blue'];
+const boton = new Boton('miParrafo', colores);
+    </script>
 
 </body>
 </html>
